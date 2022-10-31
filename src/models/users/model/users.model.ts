@@ -1,6 +1,6 @@
 
 import { Model , Table , Column ,DataType , HasMany} from "sequelize-typescript";
-import { Posts } from "src/posts/posts.model";
+import { Posts } from "src/models/posts/model/posts.model";
 interface UserCreateAttr {
     email: string;
     password: string;
@@ -16,6 +16,9 @@ export class User extends Model<User, UserCreateAttr> {
 
     @Column({type: DataType.STRING ,  allowNull: false})
     password: string;
+
+    @Column({type: DataType.STRING })
+    refreshToken: string;
 
     @HasMany(() => Posts)
     posts: Posts[];

@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { ForbiddenException } from '@nestjs/common/exceptions';
 import { InjectModel } from '@nestjs/sequelize';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from 'src/models/users/users.service';
 import { getHeapCodeStatistics } from 'v8';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/updateposts.dto';
-import { Posts } from './posts.model';
+import { Posts } from './model/posts.model';
 
 @Injectable()
 export class PostsService {
-    constructor(@InjectModel(Posts) private postRepository: typeof Posts , private userService: UsersService){}
+    constructor(@InjectModel(Posts) private postRepository: typeof Posts ,
+     private userService: UsersService){}
 
     async createPost(dto: CreatePostDto) {
         const post = await  this.postRepository.create({...dto})
